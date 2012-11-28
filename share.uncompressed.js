@@ -944,7 +944,7 @@
         return;
       }
       return this.makeDoc(docName, {
-        create: true,
+        create: false,
         type: type.name
       }, callback);
     };
