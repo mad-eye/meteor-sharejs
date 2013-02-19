@@ -308,12 +308,12 @@ var WEB = true;
     pos = 0;
     for (_i = 0, _len = op.length; _i < _len; _i++) {
       c = op[_i];
-      if (cursor <= pos) {
+      if (cursor < pos) {
         break;
       }
       switch (typeof c) {
         case 'number':
-          if (cursor <= pos + c) {
+          if (cursor < pos + c) {
             return cursor;
           }
           pos += c;
