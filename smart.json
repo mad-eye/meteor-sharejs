@@ -1,0 +1,9 @@
+{
+  "name":"meteor-sharejs",
+  "description":"Easily use sharejs",
+  "homepage":"https://github.com/mad-eye/sharejs",
+  "author":"Madeye  (http://madeye.io)",
+  "version":"0.0.1",
+  "git": "https://github.com/mad-eye/sharejs",
+  "packages":{}
+}
