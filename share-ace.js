@@ -78,6 +78,7 @@
 
   window.sharejs.extendDoc('attach_ace', function(editor, keepEditorContents) {
     var check, cursorListener, doc, docListener, editorDoc, editorListener, offsetToPos, suppress, updateCursors;
+    this.editorAttached = true;
     if (!this.provides['text']) {
       throw new Error('Only text documents can be attached to ace');
     }
@@ -182,6 +183,7 @@
       return check();
     });
     doc.detach_ace = function() {
+      this.editorAttached = false;
       doc.removeListener('remoteop', docListener);
       editorDoc.removeListener('change', editorListener);
       return delete doc.detach_ace;
