@@ -106,13 +106,16 @@
     check();
     suppress = false;
     updateCursors = function() {
-      var colors, cursor, cursorElement, cursorLayer, i, ranges, sessionId, _i, _len, _ref, _ref1, _results;
+      var colors, cursor, cursorElement, cursorLayer, i, range, ranges, sessionId, _i, _len, _ref, _ref1, _results;
       ranges = [];
       _ref = this.cursors;
       for (sessionId in _ref) {
         if (!__hasProp.call(_ref, sessionId)) continue;
         cursor = _ref[sessionId];
-        ranges.push(cursorToRange(editorDoc, cursor));
+        range = cursorToRange(editorDoc, cursor);
+        if (range) {
+          ranges.push(range);
+        }
       }
       ranges.push({
         cursor: null
