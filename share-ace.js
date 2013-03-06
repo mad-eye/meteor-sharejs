@@ -95,14 +95,18 @@
     editorDoc = editor.getSession().getDocument();
     editorDoc.setNewLineMode('unix');
     check = function() {
+      var _this = this;
       return window.setTimeout(function() {
-        var editorText, otText;
+        var editorText, otText, suppress;
         editorText = editorDoc.getValue();
         otText = doc.getText();
         if (editorText !== otText) {
-          console.error("Text does not match!");
           console.error("editor: " + editorText);
-          return console.error("ot:     " + otText);
+          console.error("ot:     " + otText);
+          suppress = true;
+          editorDoc.setValue(otText);
+          suppress = false;
+          return doc.emit("error", "OT/editor mismatch\nOT: " + otText + "\neditor: " + editorText);
         }
       }, 0);
     };
