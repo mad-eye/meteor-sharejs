@@ -106,7 +106,7 @@
           suppress = true;
           editorDoc.setValue(otText);
           suppress = false;
-          return doc.emit("error", "OT/editor mismatch\nOT: " + otText + "\neditor: " + editorText);
+          return doc.emit("warn", "OT/editor mismatch\nOT: " + otText + "\neditor: " + editorText);
         }
       }, 0);
     };
