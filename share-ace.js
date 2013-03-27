@@ -86,7 +86,7 @@
   };
 
   window.sharejs.extendDoc('attach_ace', function(editor, keepEditorContents) {
-    var check, cursorListener, doc, docListener, editorDoc, editorListener, offsetToPos, suppress, updateCursors;
+    var check, cursorListener, deleteListener, doc, docListener, editorDoc, editorListener, insertListener, offsetToPos, suppress, updateCursors;
     this.editorAttached = true;
     if (!this.provides['text']) {
       throw new Error('Only text documents can be attached to ace');
@@ -188,13 +188,13 @@
         column: offset
       };
     };
-    doc.on('insert', function(pos, text) {
+    doc.on('insert', insertListener = function(pos, text) {
       suppress = true;
       editorDoc.insert(offsetToPos(pos), text);
       suppress = false;
       return check();
     });
-    doc.on('delete', function(pos, text) {
+    doc.on('delete', deleteListener = function(pos, text) {
       var range;
       suppress = true;
       range = Range.fromPoints(offsetToPos(pos), offsetToPos(pos + text.length));
@@ -206,6 +206,8 @@
       this.editorAttached = false;
       doc.removeListener('remoteop', docListener);
       doc.removeListener('cursors', updateCursors);
+      doc.removeListener('insert', insertListener);
+      doc.removeListener('delete', deleteListener);
       editorDoc.removeListener('change', editorListener);
       editor.removeListener('changeSelection', cursorListener);
       return delete doc.detach_ace;
