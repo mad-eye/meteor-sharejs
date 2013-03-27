@@ -130,10 +130,13 @@
         if (!__hasProp.call(_ref2, sessionId)) continue;
         cursor = _ref2[sessionId];
         range = cursorToRange(editorDoc, cursor);
-        this.markers.push(editor.session.addMarker(range, "foreign_selection ace_selection", "line"));
-        if (range) {
-          ranges.push(range);
+        if (range == null) {
+          continue;
         }
+        if (range.start.column !== range.end.column || range.start.row !== range.end.row) {
+          this.markers.push(editor.session.addMarker(range, "foreign_selection ace_selection", "line"));
+        }
+        ranges.push(range);
       }
       ranges.push({
         cursor: null
