@@ -125,6 +125,9 @@
         editor.session.removeMarker(marker);
       }
       ranges = [];
+      ranges.push({
+        cursor: null
+      });
       _ref2 = this.cursors;
       for (sessionId in _ref2) {
         if (!__hasProp.call(_ref2, sessionId)) continue;
@@ -138,9 +141,6 @@
         }
         ranges.push(range);
       }
-      ranges.push({
-        cursor: null
-      });
       editor.session.$selectionMarkers = ranges;
       cursorLayer = editor.renderer.$cursorLayer;
       cursorLayer.update(editor.renderer.layerConfig);
